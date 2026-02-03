@@ -1,0 +1,3 @@
+# Railway/Nixpacks: ffmpeg для голосовых (OGG → MP3). Python подхватывается автоматически.
+[phases.setup]
+nixPkgs = ["ffmpeg"]

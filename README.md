@@ -124,6 +124,25 @@ MedBot_matveevich/
 - Проверьте, что установлены все зависимости: `pip install -r requirements.txt`
 - Для голосовых сообщений нужен ffmpeg: `brew install ffmpeg` (Mac) или `apt install ffmpeg` (Linux)
 
-## Лицензия
+## Деплой на Railway
 
-Этот проект создан для личного использования.
+1. **Репозиторий на GitHub** — код уже в [github.com/Shima337/MedBot_matveevich](https://github.com/Shima337/MedBot_matveevich).
+
+2. **Создать проект в Railway**
+   - Зайти на [railway.app](https://railway.app), авторизоваться через GitHub.
+   - **New Project** → **Deploy from GitHub repo** → выбрать `MedBot_matveevich`.
+
+3. **Переменные окружения**
+   - В проекте открыть сервис → вкладка **Variables**.
+   - Добавить:
+     - `TELEGRAM_TOKEN` — токен от [@BotFather](https://t.me/BotFather).
+     - `OPENAI_API_KEY` — ключ OpenAI.
+
+4. **Запуск**
+   - Railway сам соберёт проект по `requirements.txt` и запустит команду из Procfile: `python bot.py`.
+   - Сервис считается **worker** (без HTTP), порт не нужен.
+   - Логи — во вкладке **Deployments** → выбранный деплой → **View Logs**.
+
+5. **Важно**
+   - База SQLite на Railway **эфемерная**: при новом деплое данные сбрасываются. Для постоянной истории можно позже подключить PostgreSQL.
+   - Голосовые: в репозитории уже есть **nixpacks.toml** с ffmpeg — голосовые должны работать. Если Railway использует Railpack, в Variables добавь `RAILPACK_PACKAGES=ffmpeg`.
